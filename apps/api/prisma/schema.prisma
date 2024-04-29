@@ -33,11 +33,11 @@ model Event {
   publishDate DateTime @default(now())
 
   Transaction   Transaction[]
-  review        review[]
+  review        Review[]
   EventCategory EventCategory[]
-  ticket        ticket[]
+  ticket        Ticket[]
 
-  @@map("Events")
+  @@map("events")
 }
 
 model EventCategory {
@@ -74,7 +74,7 @@ model User {
 
   Point       Point[]
   Transaction Transaction[]
-  review      review[]
+  review      Review[]
 
   @@map("users")
 }
@@ -98,7 +98,7 @@ model Transaction {
   @@map("transactions")
 }
 
-model ticket {
+model Ticket {
   id          Int    @id @default(autoincrement())
   ticketType  String
   price       Int
@@ -107,6 +107,8 @@ model ticket {
   eventId     Int
 
   event Event @relation(fields: [eventId], references: [id])
+
+  @@map("tickets")
 }
 
 model Point {
@@ -136,7 +138,7 @@ model Voucher {
   @@map("vouchers")
 }
 
-model review {
+model Review {
   id      Int      @id @default(autoincrement())
   eventId Int
   userId  Int
