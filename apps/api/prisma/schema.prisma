@@ -10,14 +10,130 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Sample {
-  id        Int      @id @default(autoincrement())
-  name      String
-  code      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Event {
+  id            Int            @id @default(autoincrement())
+  name          String
+  publishDate   DateTime       @default(now())
+  limit         Int
+  location      String
+  description   String
+  image         String
+  startDate     DateTime
+  endDate       DateTime
+  booked        Boolean
+  eventCategory EventCategory?
+  ticket        Ticket[]
+  Review        Review[]
+  transactions  Transaction[]
 
-  @@map("samples") // if you want to use snake_case format
+  @@map("events")
+}
+
+model EventCategory {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime
+  updatedAt  DateTime @updatedAt
+  event      Event    @relation(fields: [eventId], references: [id])
+  eventId    Int      @unique
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  @@map("event_categories")
+}
+
+model Category {
+  id            Int             @id @default(autoincrement())
+  title         String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  eventCategory EventCategory[]
+
+  @@map("categories")
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  username    String
+  email       String
+  passord     String
+  referalCode String
+  role        String
+  isVerified  Boolean
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  review      Review[]
+  point       Point?
+  transaction Transaction?
+
+  @@map("users")
+}
+
+model Transaction {
+  id            Int      @id @default(autoincrement())
+  total         Int
+  status        String
+  paymentDetail String
+  referalUsed   String
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int      @unique
+  Point         Point?   @relation(fields: [pointId], references: [id])
+  pointId       Int?     @unique
+  voucher       Voucher? @relation(fields: [voucherId], references: [id])
+  voucherId     Int?     @unique
+  Event         Event?   @relation(fields: [eventId], references: [id])
+  eventId       Int?
+
+  @@map("transactions")
+}
+
+model Ticket {
+  id          Int    @id @default(autoincrement())
+  ticketType  String
+  price       Int
+  seats       Int
+  description String
+  eventId     Int
+  Event       Event  @relation(fields: [eventId], references: [id])
+
+  @@map("tickets")
+}
+
+model Point {
+  id          Int          @id @default(autoincrement())
+  point       Int
+  totalPoint  Int
+  expiredDate DateTime     @updatedAt
+  userId      Int          @unique
+  user        User         @relation(fields: [userId], references: [id])
+  Transaction Transaction?
+
+  @@map("points")
+}
+
+model Voucher {
+  id             Int          @id @default(autoincrement())
+  name           String
+  totalDiscount  Int
+  aviableVoucher Int
+  startDate      DateTime
+  expiredDate    DateTime     @updatedAt
+  Transaction    Transaction?
+
+  @@map("vouchers")
+}
+
+model Review {
+  // id      Int      @id @default(autoincrement())
+  rating  Int
+  comment String
+  date    DateTime @default(now())
+  events  Event    @relation(fields: [eventId], references: [id])
+  eventId Int
+  users   User     @relation(fields: [userId], references: [id])
+  userId  Int
+
+  @@id([eventId, userId])
+  @@map("reviews")
 }
 
 model Event {
