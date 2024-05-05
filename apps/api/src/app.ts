@@ -1,14 +1,14 @@
+import cors from 'cors';
 import express, {
-  json,
-  urlencoded,
   Express,
+  NextFunction,
   Request,
   Response,
-  NextFunction,
+  json,
+  urlencoded,
 } from 'express';
-import cors from 'cors';
 import { PORT } from './config';
-import { SampleRouter } from './routers/sample.router';
+import { DashboardRouter } from './routers/dashboard.router';
 
 export default class App {
   private app: Express;
@@ -50,13 +50,15 @@ export default class App {
   }
 
   private routes(): void {
-    const sampleRouter = new SampleRouter();
+    // const sampleRouter = new SampleRouter();
+    const dashboardRouter = new DashboardRouter();
 
     this.app.get('/api', (req: Request, res: Response) => {
       res.send(`Hello, Purwadhika Student !`);
     });
 
-    this.app.use('/api/samples', sampleRouter.getRouter());
+    // this.app.use('/api/samples', sampleRouter.getRouter());
+    this.app.use('/api/dashboard', dashboardRouter.getRouter());
   }
 
   public start(): void {

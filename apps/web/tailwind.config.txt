@@ -1,10 +1,15 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+import type { Config } from "tailwindcss";
+
+const config = {
+  darkMode: ["class"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
+  prefix: "",
   theme: {
-    fontFamily: {
-      sans: ["Roboto", "sans-serif"],
-    },
     container: {
       center: true,
       padding: "2rem",
@@ -14,19 +19,6 @@ module.exports = {
     },
     extend: {
       colors: {
-        "eastern-blue": {
-          50: "#f1f9fa",
-          100: "#ddeff0",
-          200: "#bedfe3",
-          300: "#91c9cf",
-          400: "#5da9b3",
-          500: "#428e9a",
-          600: "#397481",
-          700: "#33606b",
-          800: "#315059",
-          900: "#2c444d",
-          950: "#192c33",
-        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -83,8 +75,6 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-  // theme: {
-  //   extend: {},
-  // },
-  // plugins: [],
-};
+} satisfies Config;
+
+export default config;
