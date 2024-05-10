@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import useGetEvent from "@/hooks/api/dashboard/useGetEvent";
-import { Event } from "../../types/event.type";
+import { Event } from "../../../../../types/event.type";
+import { format, parseISO } from "date-fns";
 const ListEvent = () => {
   const { getEvent } = useGetEvent();
   const [events, setEvents] = useState<Event[]>([]);
@@ -19,17 +20,14 @@ const ListEvent = () => {
           endDate: "",
           location: "",
         };
+
         const data = await getEvent(payload);
         setEvents(data);
-      } catch (error) {
-        console.log("Error fetching events:", error);
-      }
+      } catch (error) {}
     };
-
     fetchData();
-
     return () => {};
-  }, [getEvent]);
+  }, []);
 
   return (
     <>
@@ -49,26 +47,33 @@ const ListEvent = () => {
           </thead>
         </table>
         <ScrollArea className="h-64">
-          <table className="w-full table-auto">
+          <table className="w-full table-auto font-sans">
             <tbody>
-              {events.map((e, i) => (
-                <tr key={i}>
-                  <td className="px-4 py-2">{i + 1}</td>
-                  <td className="px-4 py-2">{e.name}</td>
-                  <td className="px-4 py-2">{e.description}</td>
-                  <td className="px-4 py-2">{e.location}</td>
-                  <td className="px-4 py-2">{e.startDate}</td>
-                  <td className="px-4 py-2">{e.endDate}</td>
-                  <td className="px-4 py-2 text-center">
-                    <input type="checkbox" checked={true} />
-                  </td>
-                  <td className="px-4 py-2">
-                    <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {events
+                .slice()
+                .reverse()
+                .map((e, i) => (
+                  <tr key={i}>
+                    <td className="px-4 py-2">{i + 1}</td>
+                    <td className="px-4 py-2">{e.name}</td>
+                    <td className="px-4 py-2">{e.description}</td>
+                    <td className="px-4 py-2">{e.location}</td>
+                    <td className="px-4 py-2">
+                      {format(parseISO(e.startDate), "dd MMM yyyy HH:mm")}
+                    </td>
+                    <td className="px-4 py-2">
+                      {format(parseISO(e.endDate), "dd MMM yyyy HH:mm")}
+                    </td>
+                    <td className="px-4 py-2 text-center">
+                      <input type="checkbox" checked={e.image ? true : false} />
+                    </td>
+                    <td className="px-4 py-2">
+                      <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </ScrollArea>
