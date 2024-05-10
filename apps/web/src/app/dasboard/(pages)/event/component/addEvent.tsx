@@ -1,11 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
-import TypeTicket from "./typeTicket";
-import { useFormik } from "formik";
-import { values } from "cypress/types/lodash";
 import useCreateEvent from "@/hooks/api/dashboard/useCreateEvent";
-import { format } from "date-fns";
+import { useFormik } from "formik";
+import { useEffect } from "react";
 
 const AddEvent = () => {
   const { createEvent } = useCreateEvent();
@@ -52,6 +49,7 @@ const AddEvent = () => {
             <div className="mb-4">
               <h1 className="mb-2 font-semibold">Image</h1>
               <input
+                id="image "
                 name="image"
                 type="file"
                 accept="image/*"
@@ -76,7 +74,7 @@ const AddEvent = () => {
               <h1 className="mb-2 font-semibold">Start Date</h1>
               <input
                 name="startDate"
-                type="date"
+                type="datetime-local"
                 onChange={formik.handleChange}
                 value={formik.values.startDate}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring"
@@ -86,7 +84,7 @@ const AddEvent = () => {
               <h1 className="mb-2 font-semibold">End Date</h1>
               <input
                 name="endDate"
-                type="date"
+                type="datetime-local"
                 onChange={formik.handleChange}
                 value={formik.values.endDate}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring"

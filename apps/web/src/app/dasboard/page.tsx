@@ -1,5 +1,7 @@
 "use client";
 
+import AuthGuard from "@/hoc/AuthGuard";
+
 const dasboardPage = () => {
   return (
     <>
