@@ -1,7 +1,13 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import Image from "next/image";
+import styles from "./page.module.css";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function Home() {
+  const { id, role } = useAppSelector((state) => state.user);
+  console.log(id);
+  console.log(role);
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -15,7 +21,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
+            By{" "}
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
@@ -91,5 +97,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }

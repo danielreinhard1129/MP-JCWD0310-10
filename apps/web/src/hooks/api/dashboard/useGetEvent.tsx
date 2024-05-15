@@ -4,14 +4,7 @@ import { appConfig } from "@/utils/config";
 import { format } from "date-fns";
 const { baseUrl } = appConfig;
 
-interface EventArgs extends Omit<Event, "id"> {
-  name: string;
-  description: string;
-  image: string;
-  endDate: string;
-  startDate: string;
-  location: string;
-}
+interface EventArgs extends Omit<Event, "id" | "categories" | "image"> {}
 
 const useGetEvent = () => {
   const getEvent = async (payload: EventArgs) => {

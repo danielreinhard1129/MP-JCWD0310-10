@@ -16,14 +16,14 @@ export class DashboardRouter {
   private initializeRoutes(): void {
     this.router.post(
       '/create-event',
-      verifyToken,
-      uploader('PIC', '/images').single('file'),
+      // verifyToken,
+      uploader('PIC', '/images').array('image', 1),
       this.dashboardController.createEventService,
     );
 
     this.router.get(
       '/get-event',
-      verifyToken,
+      // verifyToken,
       this.dashboardController.getEventData,
     );
     // this.router.post()

@@ -4,33 +4,48 @@ import { Event } from "@/types/event.type";
 import { axiosInstance } from "@/lib/axios";
 
 import { useRouter } from "next/navigation";
+import { FileWithPath } from "react-dropzone";
 
 interface EventArgs extends Omit<Event, "id"> {
   name: string;
   description: string;
-  image: string;
+  image: File[];
   startDate: string;
   endDate: string;
   location: string;
+  userId?: number;
 }
 const useCreateEvent = () => {
   const router = useRouter();
 
   const createEvent = async (payload: EventArgs) => {
     try {
-      payload.startDate = new Date(payload.startDate).toISOString();
-      payload.endDate = new Date(payload.endDate).toISOString();
+      const createBlogForm = new FormData();
 
-      const { data } = await axiosInstance.post(
+      createBlogForm.append("userId", String(payload.userId));
+      const startDate = new Date(payload.startDate).toISOString();
+      const endDate = new Date(payload.endDate).toISOString();
+
+      createBlogForm.append("name", payload.name);
+      createBlogForm.append("description", payload.description);
+      payload.image.forEach((file: FileWithPath) => {
+        createBlogForm.append("image", file);
+      });
+
+      createBlogForm.append("startDate", startDate);
+      createBlogForm.append("endDate", endDate);
+      createBlogForm.append("location", payload.location);
+      createBlogForm.append("categories", payload.categories);
+
+      await axiosInstance.post<Event>(
         "/dashboard/create-event",
-        payload,
+        createBlogForm,
       );
 
-      console.log(data);
       location.reload();
       alert("Create event Success");
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
   return { createEvent };

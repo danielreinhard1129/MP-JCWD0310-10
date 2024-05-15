@@ -11,62 +11,54 @@ datasource db {
 }
 
 model Event {
-  id            Int            @id @default(autoincrement())
-  name          String
-  publishDate   DateTime       @default(now())
-  limit         Int
-  location      String
-  description   String
-  image         String
-  startDate     DateTime
-  endDate       DateTime
-  booked        Boolean
-  eventCategory EventCategory?
-  ticket        Ticket[]
-  Review        Review[]
-  transactions  Transaction[]
-  user          User           @relation(fields: [userId], references: [id])
-  userId        Int
+  id          Int      @id @default(autoincrement())
+  name        String
+  publishDate DateTime @default(now())
+  limit       Int
+  location    String
+  description String
+  image       String
+  startDate   DateTime
+  endDate     DateTime
+  booked      Boolean
+
+  ticket       Ticket[]
+  review       Review[]
+  transactions Transaction[]
+  user         User          @relation(fields: [userId], references: [id])
+  userId       Int
+
+  Category Category?
 
   @@map("events")
 }
 
-model EventCategory {
-  id         Int      @id @default(autoincrement())
-  createdAt  DateTime
-  updatedAt  DateTime @updatedAt
-  event      Event    @relation(fields: [eventId], references: [id])
-  eventId    Int      @unique
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int
-
-  @@map("event_categories")
-}
-
 model Category {
-  id            Int             @id @default(autoincrement())
-  title         String
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  eventCategory EventCategory[]
+  id        Int      @id @default(autoincrement())
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   Int      @unique
 
   @@map("categories")
 }
 
 model User {
-  id          Int          @id @default(autoincrement())
-  username    String
-  email       String
-  password    String
-  referalCode String       @unique
-  role        String
-  isVerified  Boolean
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  review      Review[]
-  point       Point?
-  transaction Transaction?
-  Event       Event[]
+  id           Int          @id @default(autoincrement())
+  username     String
+  email        String
+  password     String
+  referralCode String       @unique
+  role         String
+  isVerified   Boolean
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  review       Review[]
+  point        Point?
+  transaction  Transaction?
+  Event        Event[]
+  rewards      Rewards?
 
   @@map("users")
 }
@@ -83,8 +75,10 @@ model Transaction {
   pointId       Int?     @unique
   voucher       Voucher? @relation(fields: [voucherId], references: [id])
   voucherId     Int?     @unique
-  Event         Event?   @relation(fields: [eventId], references: [id])
+  event         Event?   @relation(fields: [eventId], references: [id])
   eventId       Int?
+  rewards       Rewards? @relation(fields: [rewardsId], references: [id])
+  rewardsId     Int?
 
   @@map("transactions")
 }
@@ -96,7 +90,7 @@ model Ticket {
   seats       Int
   description String
   eventId     Int
-  Event       Event  @relation(fields: [eventId], references: [id])
+  event       Event  @relation(fields: [eventId], references: [id])
 
   @@map("tickets")
 }
@@ -104,13 +98,25 @@ model Ticket {
 model Point {
   id          Int          @id @default(autoincrement())
   point       Int
-  totalPoint  Int
   expiredDate DateTime     @updatedAt
   userId      Int          @unique
   user        User         @relation(fields: [userId], references: [id])
-  Transaction Transaction?
+  transaction Transaction?
 
   @@map("points")
+}
+
+// add rewards
+model Rewards {
+  id      Int   @id @default(autoincrement())
+  rewards Float
+  user    User  @relation(fields: [userId], references: [id])
+  userId  Int   @unique
+
+  expiredDate DateTime      @updatedAt
+  Transaction Transaction[]
+
+  @@map("rewards")
 }
 
 model Voucher {
