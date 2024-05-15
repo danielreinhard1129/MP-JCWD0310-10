@@ -29,27 +29,27 @@ export const NavigationBar = ({ href, children }: NavigationBarProps) => {
 const Sidebar = () => {
   return (
     <>
-      <section className="flex h-screen w-80 flex-col justify-between rounded-r-xl bg-eastern-blue-500 px-4 pb-4  max-md:hidden ">
+      <section className=" flex h-screen w-80 flex-col justify-between rounded-r-xl bg-eastern-blue-500 px-4  pb-4 max-md:hidden">
         <div className=" ">
           <div className="pb-4 pt-8 text-center text-3xl text-white">LOGO</div>
           <div className="m-4 mt-8 flex flex-col gap-y-4 px-4">
-            <NavigationBar href={"/dasboard"}>
+            <NavigationBar href={"/dashboard"}>
               <LayoutDashboard />
               Dashboard
             </NavigationBar>
-            <NavigationBar href={"/dasboard/event"}>
+            <NavigationBar href={"/dashboard/event"}>
               <Theater />
               Event
             </NavigationBar>
-            <NavigationBar href={"/dasboard/order"}>
+            <NavigationBar href={"/dashboard/order"}>
               <Ticket />
               Order
             </NavigationBar>
-            <NavigationBar href={"/dasboard/analytic"}>
+            <NavigationBar href={"/dashboard/analytic"}>
               <FileBarChart />
               Analytics
             </NavigationBar>
-            <NavigationBar href={"/dasboard/setting"}>
+            <NavigationBar href={"/dashboard/setting"}>
               <Settings />
               setting
             </NavigationBar>

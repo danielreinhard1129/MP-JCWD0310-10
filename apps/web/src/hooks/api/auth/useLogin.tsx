@@ -2,6 +2,7 @@ import { axiosInstance } from "@/lib/axios";
 import { useAppDispatch } from "@/redux/hooks";
 import { loginAction } from "@/redux/slices/userSlice";
 import { User } from "@/types/user.type";
+import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 interface LoginArgs extends Pick<User, "email"> {
@@ -26,9 +27,12 @@ const useLogin = () => {
       localStorage.setItem("token", data.token);
       alert("Login Success");
       router.replace(`/`);
-      // console.log(data);
+      console.log(data);
     } catch (error) {
-      alert("Acount not detected");
+      // alert("Acount not detected");
+      if (error instanceof AxiosError) {
+        alert(error?.response?.data);
+      }
       // console.log(error);
     }
   };

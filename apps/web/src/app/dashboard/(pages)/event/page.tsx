@@ -11,11 +11,14 @@ const Customer = () => {
   return (
     <Tabs defaultValue="listevent" className="-mt-2">
       <TabsList>
-        <div className="m-auto flex max-w-6xl flex-wrap gap-8">
+        <div className="m-auto flex  max-w-6xl gap-8">
           <TabsTrigger
             value="listevent"
-            className="flex items-center gap-4 rounded-lg bg-green-100 p-6 transition duration-300 hover:border-gray-200 hover:bg-green-200 hover:shadow-xl "
+            className="flex items-center gap-4 rounded-lg bg-background p-6 transition duration-300 hover:border-gray-200 hover:bg-green-100 hover:shadow-xl data-[state=active]:bg-green-200 "
+            // style={{ touchAction: none }}
           >
+            {/* data-[state=active]:bg-background */}
+            {/* className="flex items-center gap-4 rounded-lg bg-green-100 p-6 transition duration-300 hover:border-gray-200 hover:bg-green-200 hover:shadow-xl " */}
             <ListTodo className="h-8 w-8 text-green-600 max-md:h-4 max-md:w-4" />
             <div>
               <h2 className="mb-2 text-left text-xl font-semibold text-green-800  max-md:text-sm md:text-2xl">
@@ -29,7 +32,7 @@ const Customer = () => {
 
           <TabsTrigger
             value="addevent"
-            className="flex items-center gap-4 rounded-lg bg-blue-100 p-6 transition duration-300 hover:border-gray-200 hover:bg-blue-200 hover:shadow-2xl"
+            className="flex items-center gap-4 rounded-lg bg-background p-6 transition duration-300 hover:border-gray-200 hover:bg-blue-200 hover:shadow-2xl data-[state=active]:bg-blue-100"
           >
             <CalendarDays className="h-8 w-8 text-blue-600 max-md:h-4 max-md:w-4" />
             <div>
@@ -38,6 +41,21 @@ const Customer = () => {
               </h2>
               <p className="text-sm text-blue-600 max-md:hidden">
                 Click here to add a new event
+              </p>
+            </div>
+          </TabsTrigger>
+
+          <TabsTrigger
+            value="addvoucher"
+            className="flex items-center gap-4 rounded-lg bg-background p-6 transition duration-300 hover:border-gray-200 hover:bg-blue-200 hover:shadow-2xl data-[state=active]:bg-indigo-200"
+          >
+            <CalendarDays className="h-8 w-8 text-blue-600 max-md:h-4 max-md:w-4" />
+            <div>
+              <h2 className="mb-2 text-left text-xl font-semibold text-blue-800 max-md:text-sm md:text-2xl">
+                Add Voucher
+              </h2>
+              <p className="text-sm text-blue-600 max-md:hidden">
+                Click here to add a new Voucher
               </p>
             </div>
           </TabsTrigger>
@@ -50,6 +68,10 @@ const Customer = () => {
         </TabsContent>
         <TabsContent value="listevent">
           <ListEvent></ListEvent>
+        </TabsContent>
+        <TabsContent value="addvoucher">
+          {/* <ListEvent></ListEvent> */}
+          <div>add voucher</div>
         </TabsContent>
       </div>
     </Tabs>

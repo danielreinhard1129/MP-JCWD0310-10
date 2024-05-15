@@ -4,7 +4,8 @@ import { User } from '@prisma/client';
 
 export const registerService = async (body: Omit<User, 'id'>) => {
   try {
-    const { username, email, password, referalCode } = body;
+    const { username, email, password, referralCode } = body;
+    const today = new Date();
     const existingUser = await prisma.user.findFirst({
       where: { email },
     });
@@ -14,45 +15,45 @@ export const registerService = async (body: Omit<User, 'id'>) => {
     }
 
     const existingRevealCode = await prisma.user.findFirst({
-      where: { referalCode: referalCode },
+      where: { referralCode: referralCode },
       select: { id: true },
     });
 
     if (existingRevealCode) {
+      //add point and add 3 months
       const findpoint = await prisma.point.findUnique({
         where: { userId: existingRevealCode.id },
         select: { point: true, expiredDate: true },
       });
-      // console.log(findpoint);
-
-      const newPoint = Number(findpoint?.point) + 100;
+      const newPoint = Number(findpoint?.point) + 10000;
       await prisma.point.update({
         where: { userId: existingRevealCode.id },
-        data: { point: newPoint, totalPoint: 100 },
+        data: { point: newPoint },
       });
 
-      if (findpoint?.expiredDate !== null) {
-        const expiredDate = new Date(findpoint?.expiredDate!);
-        const updateDate = new Date(
-          expiredDate.setMonth(expiredDate.getMonth() + 3),
-        );
-        await prisma.point.update({
-          where: { userId: existingRevealCode.id },
-          data: { expiredDate: updateDate },
-        });
-      }
+      const updateDate = new Date(today.setMonth(today.getMonth() + 3));
+      await prisma.point.update({
+        where: { userId: existingRevealCode.id },
+        data: { expiredDate: updateDate },
+      });
     }
 
+    // add rewards
+    const reward = existingUser ? 0.1 : 0;
+    const rewardExpiredDate = new Date(today.setMonth(today.getMonth() + 3));
     const hashPassword = await hashedPassword(password);
-    const generateRevealCode = crypto.randomUUID().slice(0, 5);
+    const generateReferralCode = crypto.randomUUID().slice(0, 5).toUpperCase();
 
     return await prisma.user.create({
       data: {
         ...body,
         password: hashPassword,
         isVerified: true,
-        referalCode: generateRevealCode,
-        point: { create: { point: 0, totalPoint: 0 } },
+        referralCode: generateReferralCode,
+        point: { create: { point: 0 } },
+        rewards: {
+          create: { rewards: reward, expiredDate: rewardExpiredDate },
+        },
       },
     });
   } catch (error) {

@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import StoreProvider from "../providers/StoreProvider";
 import { AuthProvider } from "../providers/AuthProvider";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
         <StoreProvider>
           {" "}
           <AuthProvider>
-            {/* <Header /> */}
+            <Navbar />
             {children}
             {/* <Footer /> */}{" "}
           </AuthProvider>{" "}

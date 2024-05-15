@@ -1,0 +1,38 @@
+import { useAppSelector } from "@/redux/hooks";
+import { AlignJustify } from "lucide-react";
+import React from "react";
+
+type title = {
+  title: string;
+};
+
+export const Header = () => {
+  const { username } = useAppSelector((state) => state.user);
+  return (
+    <nav className="mx-2 px-12 pb-4 pt-8 max-md:justify-between max-md:bg-eastern-blue-500">
+      <div className=" left-0 -mt-4 flex place-items-center font-sans font-semibold capitalize max-md:flex-row-reverse md:justify-between  ">
+        <div className="max-md:block md:hidden ">
+          {" "}
+          <AlignJustify />
+        </div>
+        <div>
+          <h3 className="font-semibold md:text-3xl  ">
+            Welcome back, {username}
+          </h3>
+          <h1 className=" text-gray-500 max-md:hidden">
+            Here are today's stats from your dashboard
+          </h1>
+        </div>
+
+        {/* {pathname.search("/dashboard/")
+              ? "Dashboard"
+              : pathname.replace("/dashboard/", "")} */}
+        <img
+          className="inline-block h-12 w-12  rounded-full ring-2 ring-white"
+          src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          alt=""
+        />
+      </div>
+    </nav>
+  );
+};

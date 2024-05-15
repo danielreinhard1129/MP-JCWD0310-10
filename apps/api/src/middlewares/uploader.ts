@@ -1,28 +1,68 @@
-import { format } from 'date-fns';
-import { Request } from 'express';
-import multer from 'multer';
+// import { Request } from 'express';
+// import multer from 'multer';
 
+// import { join } from 'path';
+
+// type DestinationCallback = (err: Error | null, destination: string) => void;
+// type FilenameCallback = (err: Error | null, filename: string) => void;
+
+// export const uploader = (filePrefix: string, folderName?: string) => {
+//   const defaultDir = join(__dirname, '../../public');
+
+//   const storage = multer.diskStorage({
+//     //untuk menentukan destination file kita(mau di taruh di folder mana)
+//     destination: (
+//       req: Request,
+//       file: Express.Multer.File,
+//       cb: DestinationCallback,
+//     ) => {
+//       const destination = folderName ? defaultDir + folderName : defaultDir;
+
+//       cb(null, destination);
+//     },
+
+//     //untuk mengubah nama default file kita menjadi ada prefix yg kita masukan
+//     filename: (
+//       req: Request,
+//       file: Express.Multer.File,
+//       cb: FilenameCallback,
+//     ) => {
+//       const originalnameParts = file.originalname.split('.');
+//       const fileExtension = originalnameParts[originalnameParts.length - 1];
+//       // const fileExtension = originalnameParts.pop();
+//       // const datenow = new Date().toISOString();
+//       const newFileName = filePrefix + Date.now() + '.' + fileExtension;
+
+//       cb(null, newFileName);
+//     },
+//   });
+
+//   return multer({ storage });
+// };
+
+import { Request } from 'express';
+import multer, { FileFilterCallback, Options } from 'multer';
 import { join } from 'path';
 
-type DestinationCallback = (err: Error | null, destination: string) => void;
-type FilenameCallback = (err: Error | null, filename: string) => void;
+type DestinationCallback = (error: Error | null, destination: string) => void;
+type FilenameCallback = (error: Error | null, filename: string) => void;
 
-export const uploader = (filePrefix: string, folderName?: string) => {
+export const uploader = (
+  filePreFix: string,
+  foldername?: string,
+  filelimit?: number,
+) => {
   const defaultDir = join(__dirname, '../../public');
 
   const storage = multer.diskStorage({
-    //untuk menentukan destination file kita(mau di taruh di folder mana)
     destination: (
       req: Request,
       file: Express.Multer.File,
       cb: DestinationCallback,
     ) => {
-      const destination = folderName ? defaultDir + folderName : defaultDir;
-
+      const destination = foldername ? defaultDir + foldername : defaultDir;
       cb(null, destination);
     },
-
-    //untuk mengubah nama default file kita menjadi ada prefix yg kita masukan
     filename: (
       req: Request,
       file: Express.Multer.File,
@@ -30,13 +70,29 @@ export const uploader = (filePrefix: string, folderName?: string) => {
     ) => {
       const originalnameParts = file.originalname.split('.');
       const fileExtension = originalnameParts[originalnameParts.length - 1];
-      // const fileExtension = originalnameParts.pop();
-      // const datenow = new Date().toISOString();
-      const newFileName = filePrefix + Date.now() + '.' + fileExtension;
+      const newFileName = filePreFix + Date.now() + '.' + fileExtension;
 
       cb(null, newFileName);
     },
   });
 
-  return multer({ storage });
+  const fileFilter = (
+    req: Request,
+    file: Express.Multer.File,
+    cb: FileFilterCallback,
+  ) => {
+    const extAllowed = /\.(jpg|jpeg|png|webp|avif)$/;
+    const isExtMatch = file.originalname.toLowerCase().match(extAllowed);
+    if (isExtMatch) {
+      cb(null, true);
+    } else {
+      const error = new Error('Your file extension is denied');
+      cb(null, false);
+      cb(error);
+    }
+  };
+
+  const limits = { fileSize: filelimit || 2 * 1024 * 1024 }; // default 2mb
+
+  return multer({ storage, fileFilter, limits });
 };

@@ -5,7 +5,7 @@ import { NextFunction, Request, Response } from 'express';
 export class DashboardController {
   async getEventData(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await prisma.event.findMany({ where: { ...req.body } });
+      const result = await prisma.event.findMany();
       res.status(200).send(result);
     } catch (error) {
       next(error);
@@ -14,14 +14,17 @@ export class DashboardController {
   // createevent controller
   async createEventService(req: Request, res: Response, next: NextFunction) {
     try {
-      const imagePath: string = req.file ? req.file.path : '';
+      const files = req.files as Express.Multer.File[];
+      console.log(files);
 
-      const result = await createEventService({
-        image: imagePath,
-        ...req.body,
-      });
-      console.log(imagePath);
-      res.status(200).send(result);
+      if (!files) {
+        throw new Error('No file uploaded');
+      }
+      if (files && files.length > 0) {
+        const result = await createEventService(req.body, files[0]);
+        console.log(result);
+        res.status(200).send(result);
+      }
     } catch (error) {
       next(error);
     }
