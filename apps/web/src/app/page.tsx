@@ -1,14 +1,19 @@
+
 "use client";
 
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useAppSelector } from "@/redux/hooks";
 
+import Mainpage from "@/components/Mainpage";
+
+
 export default function Home() {
   const { id, role } = useAppSelector((state) => state.user);
   console.log(id);
   console.log(role);
   return (
+
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
@@ -96,6 +101,10 @@ export default function Home() {
           </p>
         </a>
       </div>
+
+    <main>
+      <Mainpage />
+
     </main>
   );
 }
