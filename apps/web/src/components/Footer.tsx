@@ -5,11 +5,11 @@ import { Facebook, Instagram, Phone, Twitter } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <div className="container grid bg-[#438e96]">
-      <div className="m-10 flex justify-between text-white">
+    <div className="container grid bg-[#438e96] mt-56">
+      <div className="md:m-10 md:mt-10 mt-5 md:flex  justify-between text-white">
         <div className="grid">
           <h1 className="font-bold">Tentang Kami</h1>
-          <div className="flex flex-col gap-5 py-10">
+          <div className="flex flex-col gap-5 py-10 ">
             <p>Tentang Kami</p>
             <p>Blogs</p>
           </div>
@@ -41,13 +41,20 @@ export const Footer = () => {
             <p>Tiket Gelang</p>
           </div>
         </div>
+
+        <div className="md:items-center flex gap-10 mb-5 md:justify-center md:gap-10 md:hidden">
+          <Instagram />
+          <Facebook />
+          <Phone />
+          <Twitter />
+        </div>
       </div>
 
-      <div className="mx-10 flex justify-between text-white">
+      <div className="md:mx-10 flex justify-between text-white">
         <Separator />
       </div>
-      <div className="mx-10 mt-5 flex justify-between text-white">
-        <div className="flex justify-between">
+      <div className="md:mx-10 mt-5 md:gap-0 gap-5 md:mb-5 mb-5 flex justify-between text-white">
+        <div className="flex md:gap-0 gap-5 justify-between">
           <Link href="/">
             <Image src="/logo.png" alt="logo" width={70} height={70} />
           </Link>
@@ -58,7 +65,7 @@ export const Footer = () => {
         <div className="flex items-center justify-center">
           <p>© 2024 Artatix. All Rights Reserved</p>
         </div>
-        <div className="flex items-center justify-center gap-10">
+        <div className="md:flex md:items-center md:justify-center md:gap-10 hidden">
           <Instagram />
           <Facebook />
           <Phone />

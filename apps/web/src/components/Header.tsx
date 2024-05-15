@@ -34,7 +34,7 @@ export const Header = () => {
   return (
     <div className="fixed top-0 bg-[#438E96] md:container ">
       <div className="md:mx-auto md:px-4 ">
-        <div className="flex flex-row items-center gap-3 md:relative md:gap-10 md:py-2">
+        <div className="flex flex-row items-center gap-3 md:relative md:gap-10 md:py-2 md:mx-0 mx-3">
           <Link href="/">
             <Image src="/logo.png" alt="logo" width={100} height={100} />
           </Link>
@@ -68,7 +68,7 @@ export const Header = () => {
             <h3>Id</h3>
             <ChevronDown className="md:items-center md:justify-center md:text-center" />
           </div>
-          <AlignJustify className="md:hidden text-white md right-0" />
+          <AlignJustify className="md right-0 text-white md:hidden" />
           <Button className="hidden md:absolute md:right-0 md:flex md:border-2 md:border-white md:bg-transparent md:text-white">
             Buat Event
           </Button>
