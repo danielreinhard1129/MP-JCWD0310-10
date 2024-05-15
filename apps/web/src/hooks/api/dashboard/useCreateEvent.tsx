@@ -1,11 +1,9 @@
 "use client";
 
-import { Event } from "@/app/dasboard/(pages)/types/event.type";
+import { Event } from "@/types/event.type";
 import { axiosInstance } from "@/lib/axios";
 
-import axios, { AxiosError } from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface EventArgs extends Omit<Event, "id"> {
   name: string;
@@ -28,10 +26,11 @@ const useCreateEvent = () => {
         payload,
       );
 
+      console.log(data);
       location.reload();
       alert("Create event Success");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   return { createEvent };
