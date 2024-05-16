@@ -26,7 +26,12 @@ export class DashboardRouter {
       // verifyToken,
       this.dashboardController.getEventData,
     );
-    // this.router.post()
+
+    this.router.get(
+      '/get-event-category',
+      // verifyToken,
+      this.dashboardController.getEventCategory,
+    );
   }
 
   getRouter(): Router {

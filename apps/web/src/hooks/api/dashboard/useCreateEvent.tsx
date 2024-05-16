@@ -37,6 +37,10 @@ const useCreateEvent = () => {
       createBlogForm.append("location", payload.location);
       createBlogForm.append("categories", payload.categories);
 
+      createBlogForm.append("name_ticket", payload.ticket.name_ticket);
+      createBlogForm.append("qty_ticket", payload.ticket.qty_ticket);
+      createBlogForm.append("price_ticket", payload.ticket.price_ticket);
+
       await axiosInstance.post<Event>(
         "/dashboard/create-event",
         createBlogForm,
