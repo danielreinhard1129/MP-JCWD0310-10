@@ -19,7 +19,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <section className="flex h-screen flex-row">
-        <ProtectedChildren />
+        {/* <ProtectedChildren /> */}
+        <Sidebar />
+      <div className="flex w-full flex-col ">
+        <Header />
+        <div className="flex-1 bg-gray-100 px-12 py-8  font-bold">
+          {children}
+        </div>
+      </div>
       </section>
     </>
   );

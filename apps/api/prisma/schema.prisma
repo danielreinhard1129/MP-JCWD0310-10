@@ -21,6 +21,7 @@ model Event {
   startDate   DateTime
   endDate     DateTime
   booked      Boolean
+  price       Int
 
   ticket       Ticket[]
   review       Review[]
