@@ -12,7 +12,6 @@ interface EventArgs
 const useGetEvent = () => {
   const getEvent = async (payload: EventArgs) => {
     try {
-      // payload.startDate = format(payload.startDate, "MMM-dd-yyyy, mm:HH:ss");
       const response = await axiosInstance.get("/dashboard/get-event", {
         params: {
           payload,

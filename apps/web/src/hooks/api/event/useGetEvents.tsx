@@ -31,9 +31,9 @@ const useGetBlogs = (queries: IGetEventQuery) => {
     }
   };
 
-  useEffect(() => {
-    getBlogs();
-  }, [queries?.page, queries?.search]);
+  // useEffect(() => {
+  //   getBlogs();
+  // }, [queries?.page, queries?.search]);
   return { data, meta, isLoading };
 };
 
