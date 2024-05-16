@@ -1,4 +1,4 @@
-import { Event } from "@/types/event.type";
+import { Event } from "@/types/event.types";
 import { axiosInstance } from "@/lib/axios";
 import { appConfig } from "@/utils/config";
 import { format } from "date-fns";

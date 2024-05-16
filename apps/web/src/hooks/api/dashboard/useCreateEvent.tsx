@@ -1,6 +1,6 @@
 "use client";
 
-import { Event } from "@/types/event.type";
+import { Event } from "@/types/event.types";
 import { axiosInstance } from "@/lib/axios";
 
 import { useRouter } from "next/navigation";

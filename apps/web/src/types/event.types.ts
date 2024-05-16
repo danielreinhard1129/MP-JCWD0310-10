@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-import { User } from "./user.type";
 
 export interface Event {
   id: number;
@@ -7,13 +5,9 @@ export interface Event {
   location: String;
   description: String;
   image: File[];
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   categories: string;
   userId?: number;
   // user: User;
 }
-// categories: {
-//   title: string;
-// }
-// [];

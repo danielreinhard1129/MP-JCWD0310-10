@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import useGetEvent from "@/hooks/api/dashboard/useGetEvent";
-import { Event } from "../../../../../types/event.type";
+import { Event } from "../../../../../types/event.types";
 import { format, parseISO } from "date-fns";
 import { useAppSelector } from "@/redux/hooks";
 const ListEvent = () => {
