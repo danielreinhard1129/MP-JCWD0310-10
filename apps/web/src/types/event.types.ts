@@ -8,6 +8,8 @@ export interface Event {
   startDate: Date;
   endDate: Date;
   categories: string;
+  // Category: { title: "" };
   userId?: number;
+  ticket: { name_ticket: string; qty_ticket: string; price_ticket: string };
   // user: User;
 }

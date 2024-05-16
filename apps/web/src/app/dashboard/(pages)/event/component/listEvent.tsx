@@ -6,6 +6,7 @@ import useGetEvent from "@/hooks/api/dashboard/useGetEvent";
 import { Event } from "../../../../../types/event.types";
 import { format, parseISO } from "date-fns";
 import { useAppSelector } from "@/redux/hooks";
+import { DialogDemo } from "./dialog.popup";
 const ListEvent = () => {
   const { getEvent } = useGetEvent();
   const [events, setEvents] = useState<Event[]>([]);
@@ -20,6 +21,8 @@ const ListEvent = () => {
           startDate: "",
           endDate: "",
           location: "",
+          categories: "",
+          // Category: { title: "" },
         };
 
         const data = await getEvent(payload);
@@ -33,7 +36,7 @@ const ListEvent = () => {
   return (
     <>
       <div
-        className="relative mt-8 h-[350px] overflow-y-auto text-sm"
+        className="relative overflow-y-auto text-sm md:mt-8 md:h-[350px]"
         style={{
           scrollbarWidth: "none",
         }}
@@ -43,11 +46,11 @@ const ListEvent = () => {
             <tr className="sticky top-0 bg-gray-200">
               <th className="px-4 py-2">No</th>
               <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Description</th>
+              <th className="px-4 py-2 max-md:hidden">Description</th>
               <th className="px-4 py-2">Location</th>
-              <th className="px-4 py-2">Start Date</th>
-              <th className="px-4 py-2">End Date</th>
-              <th className="px-4 py-2">Image</th>
+              <th className="px-4 py-2 max-md:hidden">Start Date</th>
+              <th className="px-4 py-2 max-md:hidden">End Date</th>
+              <th className="px-4 py-2 max-md:hidden">Image</th>
               <th className="px-4 py-2">Edit</th>
             </tr>
           </thead>
@@ -72,9 +75,9 @@ const ListEvent = () => {
                     <input type="checkbox" checked={!!e.image} readOnly />
                   </td>
                   <td className="px-4 py-2">
-                    <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
-                      Edit
-                    </button>
+                    {/* <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"> */}
+                    <DialogDemo />
+                    {/* </button> */}
                   </td>
                 </tr>
               ))}
