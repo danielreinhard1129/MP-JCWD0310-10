@@ -32,7 +32,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="fixed top-0 bg-[#438E96] md:container ">
+    <div className="fixed top-0 z-50 bg-[#438E96] md:container ">
       <div className="md:mx-auto md:px-4 ">
         <div className="flex flex-row items-center gap-3 md:relative md:gap-10 md:py-2 md:mx-0 mx-3">
           <Link href="/">

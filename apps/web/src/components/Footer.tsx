@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Separator } from "./ui/separator";
+// import { Separator } from "./ui/separator";
 import Image from "next/image";
 import { Facebook, Instagram, Phone, Twitter } from "lucide-react";
+import { Separator } from "./ui/separator";
 
 export const Footer = () => {
   return (
