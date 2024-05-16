@@ -15,6 +15,7 @@ export function SelectWaktu() {
     <Select>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Waktu" className="font-bold" />
+        
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

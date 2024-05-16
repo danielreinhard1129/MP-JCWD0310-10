@@ -1,7 +1,7 @@
 'use client';
 
 import { axiosInstance } from '@/lib/axios';
-import { Event } from '@/types/event.type';
+import { Event } from '@/types/event.types';
 import {
   IPageInationQueries,
   IpageInationMeta,
@@ -31,9 +31,9 @@ const useGetBlogs = (queries: IGetEventQuery) => {
     }
   };
 
-  useEffect(() => {
-    getBlogs();
-  }, [queries?.page, queries?.search]);
+  // useEffect(() => {
+  //   getBlogs();
+  // }, [queries?.page, queries?.search]);
   return { data, meta, isLoading };
 };
 
