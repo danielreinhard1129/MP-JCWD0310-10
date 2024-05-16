@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Sidebar />
       <div className="flex w-full flex-col ">
         <Header />
-        <div className="flex-1 bg-gray-100 px-12 py-8  font-bold">
+        <div className="flex-1 bg-gray-100 py-8 font-bold  max-md:px-4 md:px-12">
           {children}
         </div>
       </div>

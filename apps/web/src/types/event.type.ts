@@ -10,7 +10,9 @@ export interface Event {
   startDate: string;
   endDate: string;
   categories: string;
+  // Category: { title: "" };
   userId?: number;
+  ticket: { name_ticket: string; qty_ticket: string; price_ticket: string };
   // user: User;
 }
 // categories: {

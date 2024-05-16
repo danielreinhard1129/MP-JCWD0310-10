@@ -28,9 +28,9 @@ export default function AuthGuard(Component: any) {
     }, [role, isLoading]);
     if (isLoading || !role) {
       return (
-        <h1 className="container flex h-screen justify-center px-4 pt-24 text-4xl font-extrabold ">
-          Loading......
-        </h1>
+        <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform animate-pulse rounded-full bg-white px-6 py-3 text-center text-lg font-semibold text-blue-900 shadow-lg dark:bg-gray-800 dark:text-blue-200">
+          Loading. ..............
+        </div>
       );
     }
 

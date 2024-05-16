@@ -1,7 +1,9 @@
 // import { registerService } from '@/services/auth/register.service';
 import prisma from '@/prisma';
 import { createEventService } from '@/services/dashboard/create-event.service';
+import { getCategoriEvent } from '@/services/dashboard/get-category.services';
 import { NextFunction, Request, Response } from 'express';
+
 export class DashboardController {
   async getEventData(req: Request, res: Response, next: NextFunction) {
     try {
@@ -25,6 +27,15 @@ export class DashboardController {
         console.log(result);
         res.status(200).send(result);
       }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getEventCategory(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await getCategoriEvent(req.body);
+      res.status(200).send(result);
     } catch (error) {
       next(error);
     }
