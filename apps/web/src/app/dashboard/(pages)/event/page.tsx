@@ -11,15 +11,12 @@ const Customer = () => {
   return (
     <Tabs defaultValue="listevent" className="-mt-2">
       <TabsList>
-        <div className="m-auto flex  max-w-6xl gap-8">
+        <div className="m-auto flex  gap-8 md:max-w-6xl">
           <TabsTrigger
             value="listevent"
-            className="flex items-center gap-4 rounded-lg bg-background p-6 transition duration-300 hover:border-gray-200 hover:bg-green-100 hover:shadow-xl data-[state=active]:bg-green-200 "
-            // style={{ touchAction: none }}
+            className="flex items-center gap-4 rounded-lg bg-background transition duration-300 hover:border-gray-200 hover:bg-green-100 hover:shadow-xl data-[state=active]:bg-green-200 "
           >
-            {/* data-[state=active]:bg-background */}
-            {/* className="flex items-center gap-4 rounded-lg bg-green-100 p-6 transition duration-300 hover:border-gray-200 hover:bg-green-200 hover:shadow-xl " */}
-            <ListTodo className="h-8 w-8 text-green-600 max-md:h-4 max-md:w-4" />
+            <ListTodo className="h-8 w-8 text-green-600 max-md:hidden max-md:h-4 max-md:w-4" />
             <div>
               <h2 className="mb-2 text-left text-xl font-semibold text-green-800  max-md:text-sm md:text-2xl">
                 List Event
@@ -32,9 +29,9 @@ const Customer = () => {
 
           <TabsTrigger
             value="addevent"
-            className="flex items-center gap-4 rounded-lg bg-background p-6 transition duration-300 hover:border-gray-200 hover:bg-blue-200 hover:shadow-2xl data-[state=active]:bg-blue-100"
+            className="flex items-center gap-4 rounded-lg bg-background transition duration-300 hover:border-gray-200 hover:bg-blue-200 hover:shadow-2xl data-[state=active]:bg-blue-100 md:p-6"
           >
-            <CalendarDays className="h-8 w-8 text-blue-600 max-md:h-4 max-md:w-4" />
+            <CalendarDays className="h-8 w-8 text-blue-600 max-md:hidden max-md:h-4 max-md:w-4" />
             <div>
               <h2 className="mb-2 text-left text-xl font-semibold text-blue-800 max-md:text-sm md:text-2xl">
                 Add Event
@@ -47,9 +44,9 @@ const Customer = () => {
 
           <TabsTrigger
             value="addvoucher"
-            className="flex items-center gap-4 rounded-lg bg-background p-6 transition duration-300 hover:border-gray-200 hover:bg-blue-200 hover:shadow-2xl data-[state=active]:bg-indigo-200"
+            className="flex items-center gap-4 rounded-lg bg-background transition duration-300 hover:border-gray-200 hover:bg-blue-200 hover:shadow-2xl data-[state=active]:bg-indigo-200 md:p-6"
           >
-            <CalendarDays className="h-8 w-8 text-blue-600 max-md:h-4 max-md:w-4" />
+            <CalendarDays className="h-8 w-8 text-blue-600 max-md:hidden max-md:h-4 max-md:w-4" />
             <div>
               <h2 className="mb-2 text-left text-xl font-semibold text-blue-800 max-md:text-sm md:text-2xl">
                 Add Voucher
