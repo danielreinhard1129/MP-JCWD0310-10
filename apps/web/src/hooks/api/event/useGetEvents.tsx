@@ -1,7 +1,7 @@
 'use client';
 
 import { axiosInstance } from '@/lib/axios';
-import { Event } from '@/types/event.types';
+import { Event } from '@/types/event.type';
 import {
   IPageInationQueries,
   IpageInationMeta,

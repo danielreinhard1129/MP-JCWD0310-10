@@ -5,11 +5,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import StoreProvider from "../providers/StoreProvider";
 import { AuthProvider } from "../providers/AuthProvider";
-<<<<<<< HEAD
-// import Header from "@/components/Header";
-=======
-// import Navbar from "@/components/Navbar";
->>>>>>> 6bb64c23b1ae9991acf2fab6fec355fb67c2f838
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,11 +24,7 @@ export default function RootLayout({
         <StoreProvider>
           {" "}
           <AuthProvider>
-<<<<<<< HEAD
             <Header/>
-=======
-            {/* <Navbar /> */}
->>>>>>> 6bb64c23b1ae9991acf2fab6fec355fb67c2f838
             {children}
             <Footer />
           </AuthProvider>{" "}
