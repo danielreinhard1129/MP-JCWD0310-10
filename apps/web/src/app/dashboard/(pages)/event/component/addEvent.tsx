@@ -18,6 +18,8 @@ const AddEvent = () => {
       startDate: "",
       endDate: "",
       location: "",
+      ticket: { name_ticket: "", qty_ticket: "", price_ticket: "" },
+
       categories: "",
     },
     onSubmit: (values) => {
@@ -28,14 +30,14 @@ const AddEvent = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="my-8 h-64 text-sm font-medium">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
+      <div className="my-8 h-64 text-sm font-medium max-md:w-full">
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="">
             <div className="mb-4">
               <h1 className="mb-2 font-semibold">Name</h1>
               <input
                 name="name"
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring"
+                className="rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring md:w-full"
                 placeholder="Enter name"
                 onChange={formik.handleChange}
                 value={formik.values.name}
@@ -45,7 +47,7 @@ const AddEvent = () => {
               <h1 className="mb-2 font-semibold">Description</h1>
               <input
                 name="description"
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring"
+                className="rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring md:w-full"
                 placeholder="Enter description"
                 onChange={formik.handleChange}
                 value={formik.values.description}
@@ -61,16 +63,18 @@ const AddEvent = () => {
                 }}
                 fileImages={formik.values.image}
               />
-              <Dropzone
-                isError={Boolean(formik.errors.image)}
-                label="image"
-                onDrop={(files) =>
-                  formik.setFieldValue("image", [
-                    ...formik.values.image,
-                    ...files.map((file) => file),
-                  ])
-                }
-              />
+              <div className={formik.values.image.length > 0 ? "hidden" : ""}>
+                <Dropzone
+                  isError={Boolean(formik.errors.image)}
+                  label="Image"
+                  onDrop={(files) =>
+                    formik.setFieldValue("image", [
+                      ...formik.values.image,
+                      ...files.map((file) => file),
+                    ])
+                  }
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -78,7 +82,7 @@ const AddEvent = () => {
               <h1 className="mb-2 font-semibold">Location</h1>
               <input
                 name="location"
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring"
+                className="rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring md:w-full"
                 placeholder="Enter your location"
                 onChange={formik.handleChange}
                 value={formik.values.location}
@@ -93,7 +97,7 @@ const AddEvent = () => {
                   type="datetime-local"
                   onChange={formik.handleChange}
                   value={formik.values.startDate}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring"
+                  className="rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring md:w-full"
                 />
               </div>
               <div className="mb-4">
@@ -103,14 +107,45 @@ const AddEvent = () => {
                   type="datetime-local"
                   onChange={formik.handleChange}
                   value={formik.values.endDate}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring"
+                  className="rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring md:w-full"
                 />
               </div>
             </div>
+
+            <div className="mb-4 ">
+              <h1 className="mb-2 font-semibold">Ticket Type</h1>
+
+              <div className="flex gap-2">
+                <input
+                  name="ticket.name_ticket"
+                  type="text"
+                  placeholder="Name"
+                  onChange={formik.handleChange}
+                  value={formik.values.ticket.name_ticket}
+                  className="rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring md:w-full"
+                />
+                <input
+                  name="ticket.qty_ticket"
+                  type="text"
+                  placeholder="Qty"
+                  onChange={formik.handleChange}
+                  value={formik.values.ticket.qty_ticket}
+                  className="rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring md:w-full"
+                />
+                <input
+                  name="ticket.price_ticket"
+                  type="text"
+                  placeholder="Price"
+                  onChange={formik.handleChange}
+                  value={formik.values.ticket.price_ticket}
+                  className="rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring md:w-full"
+                />
+              </div>
+            </div>
+
             <div className="mb-4">
               <h1 className="mb-2 font-semibold">Categories</h1>
-
-              <div className="relative ">
+              <div className="flex gap-6">
                 <select
                   name="categories"
                   className="rounded-md border border-gray-300 bg-gray-100 p-2 text-base"
@@ -127,21 +162,17 @@ const AddEvent = () => {
                     Art
                   </option>
                 </select>
-              </div>
-            </div>
-            <div className="mb-4 grid grid-cols-2">
-              <div>
-                <h1 className="mb-2 font-semibold">Ticket Type</h1>
+
+                <button
+                  type="submit"
+                  className="rounded-xl bg-blue-500 px-6 py-3 font-semibold text-white hover:bg-blue-700 focus:border-blue-500 focus:outline-none focus:ring md:w-full"
+                >
+                  Save
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <button
-          type="submit"
-          className="rounded-full bg-blue-500 px-6 py-3 font-semibold text-white hover:bg-blue-700 focus:border-blue-500 focus:outline-none focus:ring"
-        >
-          Save
-        </button>
       </div>
     </form>
   );

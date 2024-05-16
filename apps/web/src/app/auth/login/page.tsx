@@ -6,6 +6,8 @@ import { useFormik } from "formik";
 import React from "react";
 import { validationSchema } from "./validationSchema";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 const Login = () => {
   const { login } = useLogin();
   const formik = useFormik({
@@ -16,6 +18,7 @@ const Login = () => {
       login(values);
     },
   });
+  const Router = useRouter();
   return (
     <div className=" m-auto grid bg-gray-50 md:grid-cols-3">
       <div className="col-span-2 flex flex-col items-center bg-eastern-blue-500  max-md:hidden">
@@ -108,7 +111,16 @@ const Login = () => {
                 Sign in
               </button>
 
-              <p className="text-center">Don't have account? Register</p>
+              <div className="flex justify-center text-center">
+                Don't have account?{" "}
+                <div
+                  onClick={() => {
+                    Router.push("/auth/register");
+                  }}
+                >
+                  Register
+                </div>
+              </div>
             </form>
           </div>
         </div>

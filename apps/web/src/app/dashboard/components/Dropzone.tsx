@@ -22,8 +22,10 @@ const Dropzone: FC<DropzoneProps> = ({ isError, label, onDrop }) => {
   });
 
   return (
-    <div className="space-y-1.5">
-      <Label className={isError ? "text-red-500" : ""}>{label}</Label>
+    <div className="space-y-1.5 ">
+      <Label className={`${isError ? "text-red-500" : ""} mb-2 font-semibold`}>
+        {label}
+      </Label>
 
       <div
         {...getRootProps({
@@ -31,11 +33,9 @@ const Dropzone: FC<DropzoneProps> = ({ isError, label, onDrop }) => {
         })}
       >
         <input {...getInputProps()} />
-        <div className={getInputProps.length > 0 ? "hidden" : ""}>
-          <Label className="text-base ">
-            Drag & drop some files here, or click to select files
-          </Label>
-        </div>
+        <Label className="text-base ">
+          Drag & drop some files here, or click to select files
+        </Label>
       </div>
 
       {isError && (

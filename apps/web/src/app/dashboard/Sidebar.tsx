@@ -28,8 +28,9 @@ export const NavigationBar = ({ href, children }: NavigationBarProps) => {
 
 const Sidebar = () => {
   return (
+    // fixed left-0 top-0
     <>
-      <section className=" flex h-screen w-80 flex-col justify-between rounded-r-xl bg-eastern-blue-500 px-4  pb-4 max-md:hidden">
+      <section className="  flex h-screen w-80 flex-col justify-between rounded-r-xl  bg-eastern-blue-500 px-4 pb-4 max-md:hidden">
         <div className=" ">
           <div className="pb-4 pt-8 text-center text-3xl text-white">LOGO</div>
           <div className="m-4 mt-8 flex flex-col gap-y-4 px-4">
